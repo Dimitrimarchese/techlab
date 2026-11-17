@@ -11,8 +11,6 @@ public abstract class AtivoTI {
     protected String modelo;
     protected String status;
     protected LocalDateTime dataAquisicao;
-
-    // Construtor padrão — auto-incrementa o ID (uso em memória)
     public AtivoTI(String codigoPatrimonio, String modelo, String status, LocalDateTime dataAquisicao) {
         contadorID++;
         this.id = contadorID;
@@ -21,8 +19,6 @@ public abstract class AtivoTI {
         this.status = status;
         this.dataAquisicao = dataAquisicao;
     }
-
-    // Construtor com ID explícito — usado ao reconstruir objetos vindos do banco
     public AtivoTI(int id, String codigoPatrimonio, String modelo, String status, LocalDateTime dataAquisicao) {
         this.id = id;
         this.codigoPatrimonio = codigoPatrimonio;

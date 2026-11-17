@@ -12,8 +12,6 @@ public class ChamadoSuporte {
     private Prioridade prioridade;
     private LocalDateTime dataAbertura;
     private AtivoTI ativoRelacionado;
-
-    // Construtor completo — uso em memória
     public ChamadoSuporte(String titulo, String descricao, Prioridade prioridade, AtivoTI ativoRelacionado) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -21,8 +19,6 @@ public class ChamadoSuporte {
         this.dataAbertura = LocalDateTime.now();
         this.ativoRelacionado = ativoRelacionado;
     }
-
-    // Construtor de reconstrução — com ID vindo do banco (ativoRelacionado pode ser null inicialmente)
     public ChamadoSuporte(int id, String titulo, String descricao, Prioridade prioridade,
                           LocalDateTime dataAbertura, AtivoTI ativoRelacionado) {
         this.id = id;

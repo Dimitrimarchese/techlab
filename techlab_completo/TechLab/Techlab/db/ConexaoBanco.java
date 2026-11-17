@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConexaoBanco implements IConexaoBD {
-
-    // Caminho da URL de conexão SQLite — arquivo local gerado na raiz do projeto
     private static final String URL = "jdbc:sqlite:techlab.db";
 
     public ConexaoBanco() {}

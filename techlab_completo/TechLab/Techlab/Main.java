@@ -13,8 +13,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-
-        // ── 1. Inicializar banco (cria as tabelas se não existirem)
         ConexaoBanco db = new ConexaoBanco();
         db.inicializarBanco();
 
@@ -22,8 +20,6 @@ public class Main {
         ChamadoDAO chamadoDAO = new ChamadoDAO();
 
         try {
-
-            // ── 2. CRUD de Ativos ────────────────────────────────────────────
 
             System.out.println("\n===== SALVANDO ATIVOS =====");
 
@@ -46,7 +42,6 @@ public class Main {
             ativoDAO.salvar(estacao);
             ativoDAO.salvar(switch24);
 
-            // ── 3. Listar todos os ativos
             System.out.println("\n===== LISTANDO TODOS OS ATIVOS =====");
             List<AtivoTI> ativos = ativoDAO.listarTodos();
             for (AtivoTI a : ativos) {
@@ -54,21 +49,16 @@ public class Main {
                 System.out.printf("  Custo mensal: R$ %.2f%n", a.calcularCustoManutencaoMensal());
             }
 
-            // ── 4. Buscar ativo por ID
             System.out.println("\n===== BUSCANDO ATIVO ID=1 =====");
             AtivoTI encontrado = ativoDAO.buscarPorId(1);
             System.out.println("Encontrado: " + encontrado);
 
-            // ── 5. Atualizar ativo
             System.out.println("\n===== ATUALIZANDO ATIVO ID=1 =====");
             encontrado.setmodelo("Dell PowerEdge R840 (atualizado)");
             ativoDAO.atualizar(encontrado);
 
-            // ── 6. CRUD de Chamados ──────────────────────────────────────────
-
             System.out.println("\n===== SALVANDO CHAMADOS =====");
 
-            // Precisamos do objeto reconstrído do banco para vincular ao chamado
             AtivoTI ativoParaChamado = ativoDAO.buscarPorId(1);
 
             ChamadoSuporte chamado1 = new ChamadoSuporte(
@@ -88,23 +78,19 @@ public class Main {
             chamadoDAO.salvar(chamado1);
             chamadoDAO.salvar(chamado2);
 
-            // ── 7. Listar todos os chamados
             System.out.println("\n===== LISTANDO TODOS OS CHAMADOS =====");
             List<ChamadoSuporte> chamados = chamadoDAO.listarTodos();
             for (ChamadoSuporte c : chamados) {
                 System.out.println(c);
             }
 
-            // ── 8. Filtrar por prioridade ALTA
             System.out.println("\n===== CHAMADOS DE PRIORIDADE ALTA =====");
             List<ChamadoSuporte> alta = chamadoDAO.listarPorPrioridade(Prioridade.ALTA);
             alta.forEach(System.out::println);
 
-            // ── 9. Deletar ativo (testa cascade nos chamados)
             System.out.println("\n===== DELETANDO ATIVO ID=3 =====");
             ativoDAO.deletar(3);
 
-            // ── 10. Listar final
             System.out.println("\n===== ATIVOS RESTANTES =====");
             ativoDAO.listarTodos().forEach(System.out::println);
 

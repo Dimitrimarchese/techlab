@@ -8,7 +8,6 @@ public class Servidor extends AtivoTI {
     private String sistemaOperacional;
     private int capacidadeRAM; // em GB
 
-    // Construtor novo (sem ID explícito — uso em memória)
     public Servidor(String codigoPatrimonio, String modelo, String status,
                     LocalDateTime dataAquisicao, String ipEstatico,
                     String sistemaOperacional, int capacidadeRAM) {
@@ -18,7 +17,6 @@ public class Servidor extends AtivoTI {
         this.capacidadeRAM = capacidadeRAM;
     }
 
-    // Construtor de reconstrução — com ID vindo do banco
     public Servidor(int id, String codigoPatrimonio, String modelo, String status,
                     LocalDateTime dataAquisicao, String ipEstatico,
                     String sistemaOperacional, int capacidadeRAM) {
@@ -36,7 +34,6 @@ public class Servidor extends AtivoTI {
     public void setSistemaOperacional(String so)        { this.sistemaOperacional = so; }
     public void setCapacidadeRAM(int ram)               { this.capacidadeRAM = ram; }
 
-    // Custo base mensal: R$50 por GB de RAM
     @Override
     public double calcularCustoManutencaoMensal() {
         return this.capacidadeRAM * 50.0;

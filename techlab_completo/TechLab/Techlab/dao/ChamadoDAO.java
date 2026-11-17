@@ -18,7 +18,6 @@ import java.util.List;
 public class ChamadoDAO implements IPersistencia<ChamadoSuporte> {
 
     private final IConexaoBD conexaoBD = new ConexaoBanco();
-    // AtivoDAO reutilizado para buscar o objeto vinculado ao chamado
     private final AtivoDAO ativoDAO = new AtivoDAO();
 
     @Override
@@ -106,8 +105,6 @@ public class ChamadoDAO implements IPersistencia<ChamadoSuporte> {
             System.out.println("[LOG DAO] Chamado ID " + id + " removido.");
         }
     }
-
-    // Filtra chamados por prioridade — útil para triagem de suporte
     public List<ChamadoSuporte> listarPorPrioridade(Prioridade prioridade) throws SQLException {
         List<ChamadoSuporte> lista = new ArrayList<>();
         String sql = "SELECT id, titulo, descricao, prioridade, data_abertura, ativo_id "
@@ -135,7 +132,6 @@ public class ChamadoDAO implements IPersistencia<ChamadoSuporte> {
         LocalDateTime dataAbertura  = LocalDateTime.parse(rs.getString("data_abertura"));
         int ativoId                 = rs.getInt("ativo_id");
 
-        // Busca o AtivoTI vinculado pelo ID registrado no chamado
         AtivoTI ativo = ativoDAO.buscarPorId(ativoId);
 
         return new ChamadoSuporte(id, titulo, descricao, prioridade, dataAbertura, ativo);

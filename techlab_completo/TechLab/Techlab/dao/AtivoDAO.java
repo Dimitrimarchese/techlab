@@ -107,7 +107,6 @@ public class AtivoDAO implements IPersistencia<AtivoTI> {
         }
     }
 
-    // Extrai o campo detalhe_especifico de acordo com o tipo concreto do ativo
     private String extrairDetalhe(AtivoTI ativo) {
         if (ativo instanceof Servidor) {
             return ((Servidor) ativo).getIpEstatico();
@@ -118,8 +117,6 @@ public class AtivoDAO implements IPersistencia<AtivoTI> {
         }
         return "";
     }
-
-    // Reconstrói o objeto Java a partir de uma linha do ResultSet
     private AtivoTI mapearResultSetParaObjeto(ResultSet rs) throws SQLException {
         int id              = rs.getInt("id");
         String patrimonio   = rs.getString("patrimonio");
